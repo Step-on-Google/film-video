@@ -6,10 +6,12 @@
 
     <groupId>com.film</groupId>
     <artifactId>film-project</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>film-web</module>
+        <module>film-util</module>
     </modules>
 
     <dependencyManagement>
