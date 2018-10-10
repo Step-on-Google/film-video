@@ -41,6 +41,7 @@ public class IndexStatic extends HttpServlet {
     private void freeMarkerContent(Map<String, Object> root,HttpServletRequest request) {
         try {
 
+
             String path = System.getProperty("user.dir");
             String allPath = path + "\\film-web\\src\\main\\resources\\html\\index.html";
             System.out.println("allPath   "+allPath);
