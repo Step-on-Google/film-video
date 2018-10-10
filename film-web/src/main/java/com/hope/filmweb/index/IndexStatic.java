@@ -25,6 +25,8 @@ import java.util.Map;
 @Controller
 public class IndexStatic extends HttpServlet {
 
+    private static final String PATH = "E:\\工作文档\\film-project\\film-web\\src\\main\\resources\\html\\";
+
     @Resource
     Configuration cfg;
 
@@ -33,21 +35,24 @@ public class IndexStatic extends HttpServlet {
         String w = "Welcome FreeMarker!";
         Map root = new HashMap(16);
         root.put("w", w);
-        freeMarkerContent(root,request);
+        freeMarkerContent(root, "freemaker.ftl",request);
         model.addAttribute("w", "Welcome FreeMarker!");
         return "freemaker";
     }
 
-    private void freeMarkerContent(Map<String, Object> root,HttpServletRequest request) {
+
+    private void freeMarkerContent(Map<String, Object> root, String templateName,HttpServletRequest request) {
         try {
             String path = System.getProperty("user.dir");
             String allPath = path + "\\film-web\\src\\main\\resources\\html\\index.html";
             System.out.println("allPath   "+allPath);
 
 
-            Template temp = cfg.getTemplate("freemaker.ftl");
+            //Template temp = cfg.getTemplate("freemaker.ftl");
+            Template temp = cfg.getTemplate(templateName);
             //以classpath下面的static目录作为静态页面的存储目录，同时命名生成的静态html文件名称
             Writer file = new FileWriter(new File(allPath));
+            //Writer file = new FileWriter(new File(PATH + "index.html"));
             temp.process(root, file);
             file.flush();
             file.close();
