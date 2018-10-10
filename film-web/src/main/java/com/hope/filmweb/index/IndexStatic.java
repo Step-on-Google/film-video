@@ -44,6 +44,7 @@ public class IndexStatic extends HttpServlet {
             String allPath = path + "\\film-web\\src\\main\\resources\\html\\index.html";
             System.out.println("allPath   "+allPath);
 
+
             Template temp = cfg.getTemplate("freemaker.ftl");
             //以classpath下面的static目录作为静态页面的存储目录，同时命名生成的静态html文件名称
             Writer file = new FileWriter(new File(allPath));
