@@ -23,7 +23,7 @@ import java.util.Map;
  * @Description:
  */
 @Controller
-public class IndexStatic extends HttpServlet {
+public class IndexStatic{
 
     private static final String PATH = "E:\\工作文档\\film-project\\film-web\\src\\main\\resources\\html\\";
 
