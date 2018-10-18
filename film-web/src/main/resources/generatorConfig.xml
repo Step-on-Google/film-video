@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="E:\\dev\\repository\\ojdbc\\ojdbc\\6\\ojdbc-6.jar"/>
+
+    <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@172.16.230.90:1521:stupor" userId="xd_zx"
+                        password="123456"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.zdmoney.credit.dao.entity"
+                            targetProject="E:\temp\java"/>
+        <sqlMapGenerator targetPackage="com.zdmoney.credit.dao.mapper"
+                         targetProject="E:\temp\resources"/>
+
+        <!-- 生成xml文件 -->
+        <javaClientGenerator targetPackage="com.zdmoney.credit.dao.mapper" targetProject="E:\temp\mapper\dao"
+                             type="XMLMAPPER"/>
+
+        <!-- 生成annotated -->
+        <!--<javaClientGenerator targetPackage="com.huifu.tty.dal.mapper" targetProject="src/main/java" type="ANNOTATEDMAPPER"/>-->
+
+        <!-- XML和注解的混合形式，(上面这种情况中的)SqlProvider注解方法会被XML替代-->
+        <!--<javaClientGenerator targetPackage="com.huifu.tty.dal.mapper.Test" targetProject="src/main/java" type="MIXEDMAPPER"/>-->
+
+
+        <table tableName="T_SH_CREADIT_PLM7020" domainObjectName="ShCreaditPlm7020"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+    </context>
+</generatorConfiguration>
