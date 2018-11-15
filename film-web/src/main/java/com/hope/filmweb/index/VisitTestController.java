@@ -1,5 +1,7 @@
 package com.hope.filmweb.index;
 
+import com.zjc.index.IndexService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @description:
  */
 @RestController
-public class VisitTest {
+public class VisitTestController {
+
+    @Autowired
+    private IndexService indexService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
@@ -19,6 +24,7 @@ public class VisitTest {
 
     @RequestMapping(value = "/testRedis", method = RequestMethod.GET)
     public String testRedis() {
+        indexService.showIndexData();
         return "redis success";
     }
 
