@@ -12,8 +12,19 @@
     <groupId>com.zjc</groupId>
     <artifactId>film-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <name>film-service</name>
-    <packaging>jar</packaging>
 
     <properties>
         <film.dao.version>1.0-SNAPSHOT</film.dao.version>
@@ -24,6 +35,11 @@
             <groupId>com.zjc</groupId>
             <artifactId>film-dao</artifactId>
             <version>${film.dao.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zjc</groupId>
+            <artifactId>film-util</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
 

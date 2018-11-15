@@ -12,7 +12,7 @@
     <!--web项目-->
     <groupId>com.zjc</groupId>
     <artifactId>film-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>film-web</name>
@@ -22,20 +22,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <film.util.version>1.0.0</film.util.version>
-        <film.service.version>1.0-SNAPSHOT</film.service.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.zjc</groupId>
             <artifactId>film-util</artifactId>
-            <version>${film.util.version}</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>com.zjc</groupId>
             <artifactId>film-service</artifactId>
-            <version>${film.service.version}</version>
+            <version>${version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -13,7 +13,6 @@
     <artifactId>film-dao</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>film-dao</name>
-    <packaging>jar</packaging>
 
 
 </project>
