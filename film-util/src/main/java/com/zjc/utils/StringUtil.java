@@ -1,3 +1,5 @@
+package com.zjc.utils;
+
 import org.apache.commons.lang.StringUtils;
 
 /**
