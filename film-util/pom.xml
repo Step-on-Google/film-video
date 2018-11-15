@@ -3,13 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>com.zjc</groupId>
         <artifactId>film-project</artifactId>
-        <groupId>com.film</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <!--工具-->
+    <groupId>com.zjc</groupId>
     <artifactId>film-util</artifactId>
+    <version>1.0.0</version>
+
+    <name>film-util</name>
+    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>
@@ -31,6 +37,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.8.0-beta2</version>
+        </dependency>
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>1.4.5.RELEASE</version>
         </dependency>
     </dependencies>
 
