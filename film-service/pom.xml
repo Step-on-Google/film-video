@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.zjc</groupId>
-            <artifactId>film-util</artifactId>
+            <artifactId>film-common</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>
