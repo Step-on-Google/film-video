@@ -13,6 +13,7 @@
     <groupId>com.zjc</groupId>
     <artifactId>film-util</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
 
     <name>film-util</name>
     <description>Demo project for Spring Boot</description>

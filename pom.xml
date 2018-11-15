@@ -12,6 +12,9 @@
     <modules>
         <module>film-web</module>
         <module>film-util</module>
+        <module>film-service</module>
+        <module>film-service</module>
+        <module>film-dao</module>
     </modules>
 
     <dependencyManagement>
