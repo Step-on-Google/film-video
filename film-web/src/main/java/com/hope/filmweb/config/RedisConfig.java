@@ -20,7 +20,7 @@ public class RedisConfig {
     @Autowired
     private JedisConnectionFactory connectionFactory;
 
-    @Bean
+    @Bean(name = "redisTemplate")
     public RedisTemplate<Serializable, Object> getTemplate() {
         RedisTemplate<Serializable, Object> redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(connectionFactory);
