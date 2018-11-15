@@ -17,4 +17,9 @@ public class VisitTest {
         return "helloWrod~!";
     }
 
+    @RequestMapping(value = "/testRedis", method = RequestMethod.GET)
+    public String testRedis() {
+        return "redis success";
+    }
+
 }
