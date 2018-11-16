@@ -44,7 +44,7 @@ public class IndexStatic{
     private void freeMarkerContent(Map<String, Object> root, String templateName,HttpServletRequest request) {
         try {
             String path = System.getProperty("user.dir");
-            String allPath = path + "\\film-web\\src\\main\\resources\\html\\index.html";
+            String allPath = path + "\\film-web\\src\\main\\resources\\html\\html.html";
             System.out.println("allPath   "+allPath);
 
 
@@ -52,7 +52,7 @@ public class IndexStatic{
             Template temp = cfg.getTemplate(templateName);
             //以classpath下面的static目录作为静态页面的存储目录，同时命名生成的静态html文件名称
             Writer file = new FileWriter(new File(allPath));
-            //Writer file = new FileWriter(new File(PATH + "index.html"));
+            //Writer file = new FileWriter(new File(PATH + "html.html"));
             temp.process(root, file);
             file.flush();
             file.close();

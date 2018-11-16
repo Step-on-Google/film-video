@@ -2,16 +2,19 @@ package com.hope.filmweb.index;
 
 import com.zjc.index.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author:Zhang jc
  * @date: 2018/10/9 16:52
  * @description:
  */
-@RestController
+@Controller
 public class VisitTestController {
 
     @Autowired
@@ -19,10 +22,11 @@ public class VisitTestController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
-        return "helloWrod~!";
+        return "/html/index";
     }
 
     @RequestMapping(value = "/testRedis", method = RequestMethod.GET)
+    @ResponseBody
     public String testRedis() {
         indexService.showIndexData();
         return "redis success";
