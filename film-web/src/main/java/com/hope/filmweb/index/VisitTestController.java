@@ -22,7 +22,7 @@ public class VisitTestController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
-        return "/html/index";
+        return "html/index";
     }
 
     @RequestMapping(value = "/testRedis", method = RequestMethod.GET)
