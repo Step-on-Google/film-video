@@ -15,6 +15,7 @@
         <module>film-common</module>
         <module>film-service</module>
         <module>film-dao</module>
+        <module>film-job</module>
     </modules>
 
     <dependencyManagement>
