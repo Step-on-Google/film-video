@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class TestTask {
 
     /**
-     * 每间隔10秒输出时间
+     * 每间隔2秒输出时间
      */
-    @Scheduled(cron = "1 0 0 0 * ?")
-    public void logTime() {
-        log.info("定时任务，现在时间：" + System.currentTimeMillis());
-    }
+//    @Scheduled(cron = "0/2 * * * * ?")
+//    public void logTime() {
+//        log.info("定时任务，现在时间：" + System.currentTimeMillis());
+//    }
 
 }
