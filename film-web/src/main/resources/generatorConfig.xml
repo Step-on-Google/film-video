@@ -22,7 +22,7 @@
                          targetProject="E:\temp\resources"/>
 
         <!-- 生成xml文件 -->
-        <javaClientGenerator targetPackage="com.zdmoney.credit.dao.mapper" targetProject="E:\temp\mapper\dao"
+        <javaClientGenerator targetPackage="com.zdmoney.credit.dao.mapper" targetProject="E:\temp\mapper"
                              type="XMLMAPPER"/>
 
         <!-- 生成annotated -->
@@ -32,7 +32,7 @@
         <!--<javaClientGenerator targetPackage="com.huifu.tty.dal.mapper.Test" targetProject="src/main/java" type="MIXEDMAPPER"/>-->
 
 
-        <table tableName="T_SH_CREADIT_PLM7020" domainObjectName="ShCreaditPlm7020"
+        <table tableName="CREDIT_SCHEDULE_JOB" domainObjectName="CreditScheduleJob"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
