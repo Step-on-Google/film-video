@@ -1,0 +1,19 @@
+body{
+	font-family: tahoma;
+	font-size: 12px;
+	background-color: #fff;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.ico{
+	*overflow: hidden;
+}
