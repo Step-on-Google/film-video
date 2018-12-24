@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @Author: zhangjiachen
@@ -32,12 +32,13 @@ public class IpFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (!ipCheck(servletRequest)) {
-            HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        if (!ipCheck(request)) {
             response.sendRedirect("https://www.baidu.com/");
             return;
         }
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(request, response);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class IpFilter implements Filter {
      * @author:Zhang jc
      * @date: 2018/12/22 11:13
      */
-    private boolean ipCheck(ServletRequest request) {
+    private boolean ipCheck(HttpServletRequest request) {
         log.info("请求进来了，请求ip为：{},名称为：{},端口为:{}", request.getRemoteAddr(),
                 request.getRemoteHost(), request.getRemotePort());
         String ip = redisUtils.getKey(request.getRemoteAddr());
