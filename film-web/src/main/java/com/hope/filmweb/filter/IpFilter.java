@@ -22,7 +22,6 @@ import java.io.PrintWriter;
  * @Description: 请求过滤器
  */
 @Component
-@WebFilter(filterName = "ipFilter")
 public class IpFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(IpFilter.class);
 
