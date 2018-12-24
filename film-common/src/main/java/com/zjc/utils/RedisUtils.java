@@ -35,11 +35,20 @@ public class RedisUtils {
      * @author:Zhang jc
      * @date: 2018/12/22 10:58
      */
-    private Jedis getJedis() {
+    private synchronized Jedis getJedis() {
         if (null == jedisPool) {
             return null;
         }
-        Jedis jedis = jedisPool.getResource();
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != jedis) {
+                jedis.close();
+            }
+        }
         return jedis;
     }
 
@@ -51,10 +60,14 @@ public class RedisUtils {
      * @author:Zhang jc
      * @date: 2018/12/22 10:57
      */
-    public boolean setKey(String key, String value) {
-        String set = getJedis().set(key, value);
-        if (StringUtils.isNotBlank(set)) {
-            return true;
+    public synchronized boolean setKey(String key, String value) {
+        try {
+            String set = getJedis().set(key, value);
+            if (StringUtils.isNotBlank(set)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
@@ -67,10 +80,14 @@ public class RedisUtils {
      * @author:Zhang jc
      * @date: 2018/12/22 11:37
      */
-    public boolean setKeySecond(String key, String value, int second) {
-        String set = getJedis().setex(key, second, value);
-        if (StringUtils.isNotBlank(set)) {
-            return true;
+    public synchronized boolean setKeySecond(String key, String value, int second) {
+        try {
+            String set = getJedis().setex(key, second, value);
+            if (StringUtils.isNotBlank(set)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

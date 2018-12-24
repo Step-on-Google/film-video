@@ -2,6 +2,7 @@ package com.zjc.manger;
 
 import com.zjc.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,11 @@ public class IpFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        ipCheck(servletRequest);
+        if (!ipCheck(servletRequest)) {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            response.sendRedirect("https://www.baidu.com/");
+            return;
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
@@ -51,8 +56,9 @@ public class IpFilter implements Filter {
     private boolean ipCheck(ServletRequest request) {
         log.info("请求进来了，请求ip为：{},名称为：{},端口为:{}", request.getRemoteAddr(),
                 request.getRemoteHost(), request.getRemotePort());
-        log.info("::::::::::::::::::::::::{}",redisUtils.getKey(request.getRemoteAddr()));
-        if (redisUtils.keyIsExist(request.getRemoteAddr())) {
+        String ip = redisUtils.getKey(request.getRemoteAddr());
+        log.info("::::::::::::::::::::::::{}", ip);
+        if (StringUtils.isNotBlank(ip)) {
             log.info("这逼访问的有点频繁啊，不让访问!!");
             return false;
         }
