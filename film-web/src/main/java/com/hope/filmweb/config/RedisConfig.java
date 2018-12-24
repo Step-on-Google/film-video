@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import redis.clients.jedis.Jedis;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -45,6 +47,35 @@ public class RedisConfig {
 //        log.info("foo::::::::::::::::{}", value);
 //        return jc;
 //    }
+
+
+    @Bean(name = "redisTemplate")
+    public RedisTemplate getRedisTemplate() {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxIdle(8);
+        poolConfig.setMinIdle(0);
+        poolConfig.setTestOnBorrow(true);
+        poolConfig.setTestOnReturn(true);
+        poolConfig.setTestWhileIdle(true);
+        poolConfig.setNumTestsPerEvictionRun(10);
+        poolConfig.setTimeBetweenEvictionRunsMillis(60000);
+        poolConfig.setTestOnReturn(true);
+        jedisConnectionFactory.setPoolConfig(poolConfig);
+        jedisConnectionFactory.setHostName("47.100.237.222");
+        jedisConnectionFactory.setPort(6379);
+        jedisConnectionFactory.setDatabase(0);
+        jedisConnectionFactory.setTimeout(2000);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setEnableTransactionSupport(true);
+        log.info("RedisTemplate 注入成功!");
+        return redisTemplate;
+    }
 
 
 }

@@ -1,12 +1,10 @@
+
 package com.zjc.utils;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 import java.util.Map;
@@ -24,99 +22,11 @@ import java.util.concurrent.TimeUnit;
  */
 @Component("redisUtils")
 public class RedisUtils {
+//    @Autowired
+//    private JedisPool jedisPool;
+
     @Autowired
-    private JedisPool jedisPool;
-
-    /**
-     * 获得jedis连接
-     *
-     * @param:
-     * @return:
-     * @author:Zhang jc
-     * @date: 2018/12/22 10:58
-     */
-    private synchronized Jedis getJedis() {
-        if (null == jedisPool) {
-            return null;
-        }
-        Jedis jedis = null;
-        try {
-            jedis = jedisPool.getResource();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            jedisPool.returnResource(jedis);
-        }
-        return jedis;
-    }
-
-    /**
-     * 设置缓存
-     *
-     * @param:
-     * @return: true成功 false失败
-     * @author:Zhang jc
-     * @date: 2018/12/22 10:57
-     */
-    public synchronized boolean setKey(String key, String value) {
-        try {
-            String set = getJedis().set(key, value);
-            if (StringUtils.isNotBlank(set)) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 设置超时时间 秒
-     *
-     * @param:
-     * @return:
-     * @author:Zhang jc
-     * @date: 2018/12/22 11:37
-     */
-    public synchronized boolean setKeySecond(String key, String value, int second) {
-        try {
-            String set = getJedis().setex(key, second, value);
-            if (StringUtils.isNotBlank(set)) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 根据key拿value
-     *
-     * @param:
-     * @return:
-     * @author:Zhang jc
-     * @date: 2018/12/22 11:06
-     */
-    public String getKey(String key) {
-        return getJedis().get(key);
-    }
-
-    /**
-     * 判断key
-     *
-     * @param:
-     * @return:
-     * @author:Zhang jc
-     * @date: 2018/12/22 11:10
-     */
-    public boolean keyIsExist(String key) {
-        return getJedis().exists(key);
-    }
-
-
-    //    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     public void setRedisServer(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
@@ -673,5 +583,4 @@ public class RedisUtils {
             return 0;
         }
     }
-
 }
