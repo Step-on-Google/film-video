@@ -6,8 +6,11 @@ import com.zjc.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,6 +22,9 @@ import java.io.PrintWriter;
  * @Date: 2018/12/17 20:58
  * @Description: 请求过滤器
  */
+@Configuration
+@Order(1)
+@WebFilter(filterName = "ipFilter", urlPatterns = {"/*"})
 public class IpFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(IpFilter.class);
 
