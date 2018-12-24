@@ -45,9 +45,7 @@ public class RedisUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null != jedis) {
-                jedis.close();
-            }
+            jedisPool.returnResource(jedis);
         }
         return jedis;
     }
