@@ -79,14 +79,14 @@ public class IpFilter implements Filter {
         String ip = IpUtils.getIpAddr(request);
         logger.info("请求进来了，请求ip为：{},名称为：{},端口为:{}", ip,
                 request.getRemoteHost(), request.getRemotePort());
-        Boolean isExist = redisUtils.hasKey(ip);
-        logger.info("::::::::::::::::::::::::{}", ip);
-        if (isExist) {
-            logger.info("这逼访问的有点频繁啊，不让访问!!");
-            return false;
-        }
-        logger.info("正常访问...");
-        redisUtils.set(ip, ip, 2);
+//        Boolean isExist = redisUtils.hasKey(ip);
+//        logger.info("::::::::::::::::::::::::{}", ip);
+//        if (isExist) {
+//            logger.info("这逼访问的有点频繁啊，不让访问!!");
+//            return false;
+//        }
+//        logger.info("正常访问...");
+//        redisUtils.set(ip, ip, 2);
         return true;
     }
 }
