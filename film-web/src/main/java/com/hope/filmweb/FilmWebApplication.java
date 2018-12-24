@@ -1,5 +1,6 @@
 package com.hope.filmweb;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @SpringBootApplication(scanBasePackages = {"com.*"})
 @ServletComponentScan
+@MapperScan("com.zjc.mapper")
 public class FilmWebApplication {
 
     public static void main(String[] args) {
