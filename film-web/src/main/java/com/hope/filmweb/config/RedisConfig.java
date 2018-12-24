@@ -30,9 +30,7 @@ public class RedisConfig {
         poolConfig.setTimeBetweenEvictionRunsMillis(60000);
         poolConfig.setTestOnReturn(true);
         JedisPool jedisPool = new JedisPool(poolConfig, "47.100.237.222", 6379);
-        Jedis jedis = jedisPool.getResource();
-        log.info("打印redis连接池{}", jedis.get("zjc"));
-        jedis.close();
+        log.info("redis连接池注入成功！");
         return jedisPool;
     }
 

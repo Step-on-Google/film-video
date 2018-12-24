@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -20,7 +21,8 @@ import java.io.PrintWriter;
  * @Date: 2018/12/17 20:58
  * @Description: 请求过滤器
  */
-@WebFilter(filterName = "ipFilter", urlPatterns = {"/*"})
+@Component
+@WebFilter(filterName = "ipFilter")
 public class IpFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(IpFilter.class);
 
@@ -36,24 +38,24 @@ public class IpFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-//        if (!ipCheck(request)) {
-//            PrintWriter writer = null;
-//            OutputStreamWriter osw = null;
-//            try {
-//                osw = new OutputStreamWriter(response.getOutputStream(),
-//                        "UTF-8");
-//                writer = new PrintWriter(osw, true);
-//                String jsonStr = JSONUtils.toJSONString("请不要频繁刷新!");
-//                writer.write(jsonStr);
-//                writer.flush();
-//                writer.close();
-//                osw.close();
-//                return;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                logger.error("过滤异常!", e);
-//            }
-//        }
+        if (!ipCheck(request)) {
+            PrintWriter writer;
+            OutputStreamWriter osw;
+            try {
+                osw = new OutputStreamWriter(response.getOutputStream(),
+                        "UTF-8");
+                writer = new PrintWriter(osw, true);
+                String jsonStr = JSONUtils.toJSONString("请不要频繁刷新!");
+                writer.write(jsonStr);
+                writer.flush();
+                writer.close();
+                osw.close();
+                return;
+            } catch (IOException e) {
+                e.printStackTrace();
+                logger.error("过滤异常!", e);
+            }
+        }
         filterChain.doFilter(request, response);
     }
 
