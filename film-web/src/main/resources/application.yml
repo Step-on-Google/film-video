@@ -3,5 +3,3 @@ server:
 spring:
   freemarker:
     template-loader-path: classpath:/templates/freemaker/
-#logging:
-#  config: classpath:log4j2.xml
