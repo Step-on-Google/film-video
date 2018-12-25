@@ -31,15 +31,24 @@ public class IpFilter implements Filter {
     @Autowired
     private RedisUtils redisUtils;
 
+
+    private static String img = "/img";
+    private static String css = "/css";
+    private static String js = "/js";
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        logger.info("过滤器初始化。。。");
+    public void init(javax.servlet.FilterConfig filterConfig) throws ServletException {
+        logger.info("过滤器初始化。。。{}");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        if (urlCheck(request.getRequestURI())) {
+            //如果是静态资源直接放行
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
         if (!ipCheck(request)) {
             PrintWriter writer;
             OutputStreamWriter osw;
@@ -79,14 +88,29 @@ public class IpFilter implements Filter {
         String ip = IpUtils.getIpAddr(request);
         logger.info("请求进来了，请求ip为：{},名称为：{},端口为:{}", ip,
                 request.getRemoteHost(), request.getRemotePort());
-//        Boolean isExist = redisUtils.hasKey(ip);
-//        logger.info("::::::::::::::::::::::::{}", ip);
-//        if (isExist) {
-//            logger.info("这逼访问的有点频繁啊，不让访问!!");
-//            return false;
-//        }
-//        logger.info("正常访问...");
-//        redisUtils.set(ip, ip, 2);
+        Boolean isExist = redisUtils.hasKey(ip);
+        logger.info("::::::::::::::::::::::::{}", ip);
+        if (isExist) {
+            logger.info("这逼访问的有点频繁啊，不让访问!!");
+            return false;
+        }
+        logger.info("正常访问...");
+        redisUtils.set(ip, ip, 2);
         return true;
+    }
+
+    /**
+     * 校验url是否需要过滤
+     *
+     * @param:
+     * @return:
+     * @author:Zhang jc
+     * @date: 2018/12/25 10:09
+     */
+    private boolean urlCheck(String url) {
+        if (url.contains(img) || url.contains(js) || url.contains(css)) {
+            return true;
+        }
+        return false;
     }
 }
