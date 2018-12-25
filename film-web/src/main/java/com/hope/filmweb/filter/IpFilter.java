@@ -48,6 +48,7 @@ public class IpFilter implements Filter {
         if (urlCheck(request.getRequestURI())) {
             //如果是静态资源直接放行
             filterChain.doFilter(servletRequest, servletResponse);
+            return;
         }
         if (!ipCheck(request)) {
             PrintWriter writer;
