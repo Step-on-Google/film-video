@@ -49,35 +49,35 @@ public class RedisConfig {
 //    }
 
 
-    @Bean(name = "jedisPoolConfig")
-    public JedisPoolConfig getJedisPoolConfig() {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxIdle(8);
-        poolConfig.setMinIdle(0);
-        poolConfig.setTestOnBorrow(true);
-        poolConfig.setTestOnReturn(true);
-        poolConfig.setTestWhileIdle(true);
-        poolConfig.setNumTestsPerEvictionRun(10);
-        poolConfig.setTimeBetweenEvictionRunsMillis(60000);
-        poolConfig.setTestOnReturn(true);
-        return poolConfig;
-    }
+//    @Bean(name = "jedisPoolConfig")
+//    public JedisPoolConfig getJedisPoolConfig() {
+//        JedisPoolConfig poolConfig = new JedisPoolConfig();
+//        poolConfig.setMaxIdle(8);
+//        poolConfig.setMinIdle(0);
+//        poolConfig.setTestOnBorrow(true);
+//        poolConfig.setTestOnReturn(true);
+//        poolConfig.setTestWhileIdle(true);
+//        poolConfig.setNumTestsPerEvictionRun(10);
+//        poolConfig.setTimeBetweenEvictionRunsMillis(60000);
+//        poolConfig.setTestOnReturn(true);
+//        return poolConfig;
+//    }
 
-    @Bean(name = "jedisConnectionFactory")
-    public JedisConnectionFactory getJedisConnectionFactory() {
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setPoolConfig(getJedisPoolConfig());
-        jedisConnectionFactory.setHostName("47.100.237.222");
-        jedisConnectionFactory.setPort(6379);
-        jedisConnectionFactory.setDatabase(0);
-        jedisConnectionFactory.setTimeout(2000);
-        return jedisConnectionFactory;
-    }
+//    @Bean(name = "jedisConnectionFactory")
+//    public JedisConnectionFactory getJedisConnectionFactory() {
+//        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+//        jedisConnectionFactory.setPoolConfig(getJedisPoolConfig());
+//        jedisConnectionFactory.setHostName("47.100.237.222");
+//        jedisConnectionFactory.setPort(6379);
+//        jedisConnectionFactory.setDatabase(0);
+//        jedisConnectionFactory.setTimeout(2000);
+//        return jedisConnectionFactory;
+//    }
 
     @Bean(name = "redisTemplate")
-    public RedisTemplate getRedisTemplate() {
+    public RedisTemplate getRedisTemplate(JedisConnectionFactory jedisConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
-        redisTemplate.setConnectionFactory(getJedisConnectionFactory());
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());

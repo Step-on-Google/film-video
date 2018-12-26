@@ -3,3 +3,8 @@ server:
 spring:
   freemarker:
     template-loader-path: classpath:/templates/freemaker/
+  redis:
+    host: 47.100.237.222
+    port: 6379
+    database: 0
+    timeout: 2000
