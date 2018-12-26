@@ -20,21 +20,21 @@ import redis.clients.jedis.JedisPoolConfig;
 @Slf4j
 public class RedisConfig {
 
-    @Bean(name = "jedisPool")
-    public JedisPool getJedisPool() {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxIdle(8);
-        poolConfig.setMinIdle(0);
-        poolConfig.setTestOnBorrow(true);
-        poolConfig.setTestOnReturn(true);
-        poolConfig.setTestWhileIdle(true);
-        poolConfig.setNumTestsPerEvictionRun(10);
-        poolConfig.setTimeBetweenEvictionRunsMillis(60000);
-        poolConfig.setTestOnReturn(true);
-        JedisPool jedisPool = new JedisPool(poolConfig, "47.100.237.222", 6379);
-        log.info("redis连接池注入成功！");
-        return jedisPool;
-    }
+//    @Bean(name = "jedisPool")
+//    public JedisPool getJedisPool() {
+//        JedisPoolConfig poolConfig = new JedisPoolConfig();
+//        poolConfig.setMaxIdle(8);
+//        poolConfig.setMinIdle(0);
+//        poolConfig.setTestOnBorrow(true);
+//        poolConfig.setTestOnReturn(true);
+//        poolConfig.setTestWhileIdle(true);
+//        poolConfig.setNumTestsPerEvictionRun(10);
+//        poolConfig.setTimeBetweenEvictionRunsMillis(60000);
+//        poolConfig.setTestOnReturn(true);
+//        JedisPool jedisPool = new JedisPool(poolConfig, "47.100.237.222", 6379);
+//        log.info("redis连接池注入成功！");
+//        return jedisPool;
+//    }
 
 
 //    @Bean
