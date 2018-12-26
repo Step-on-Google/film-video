@@ -49,10 +49,8 @@ public class RedisConfig {
 //    }
 
 
-    @Bean(name = "redisTemplate")
-    public RedisTemplate getRedisTemplate() {
-        RedisTemplate redisTemplate = new RedisTemplate();
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+    @Bean(name = "jedisPoolConfig")
+    public JedisPoolConfig getJedisPoolConfig() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxIdle(8);
         poolConfig.setMinIdle(0);
@@ -62,12 +60,24 @@ public class RedisConfig {
         poolConfig.setNumTestsPerEvictionRun(10);
         poolConfig.setTimeBetweenEvictionRunsMillis(60000);
         poolConfig.setTestOnReturn(true);
-        jedisConnectionFactory.setPoolConfig(poolConfig);
+        return poolConfig;
+    }
+
+    @Bean(name = "jedisConnectionFactory")
+    public JedisConnectionFactory getJedisConnectionFactory() {
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setPoolConfig(getJedisPoolConfig());
         jedisConnectionFactory.setHostName("47.100.237.222");
         jedisConnectionFactory.setPort(6379);
         jedisConnectionFactory.setDatabase(0);
         jedisConnectionFactory.setTimeout(2000);
-        redisTemplate.setConnectionFactory(jedisConnectionFactory);
+        return jedisConnectionFactory;
+    }
+
+    @Bean(name = "redisTemplate")
+    public RedisTemplate getRedisTemplate() {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(getJedisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
