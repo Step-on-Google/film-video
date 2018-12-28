@@ -1,7 +1,7 @@
-package com.zjc.index;
+package com.zjc.service.mail;
 
 import com.sun.mail.util.MailSSLSocketFactory;
-import com.zjc.config.MailConfig;
+import com.zjc.service.config.MailConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;

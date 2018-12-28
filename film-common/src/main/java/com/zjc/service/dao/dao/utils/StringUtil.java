@@ -1,4 +1,4 @@
-package com.zjc.utils;
+package com.zjc.service.dao.dao.utils;
 
 import org.apache.commons.lang.StringUtils;
 

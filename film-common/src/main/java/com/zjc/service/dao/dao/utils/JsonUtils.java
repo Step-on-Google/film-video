@@ -1,4 +1,4 @@
-package com.zjc.utils;
+package com.zjc.service.dao.dao.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;

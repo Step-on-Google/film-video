@@ -1,8 +1,8 @@
 package com.hope.filmweb.filter;
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.zjc.utils.IpUtils;
-import com.zjc.utils.RedisUtils;
+import com.zjc.service.dao.dao.utils.IpUtils;
+import com.zjc.service.dao.dao.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

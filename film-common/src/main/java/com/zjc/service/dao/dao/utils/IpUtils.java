@@ -1,4 +1,4 @@
-package com.zjc.utils;
+package com.zjc.service.dao.dao.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

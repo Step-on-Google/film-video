@@ -1,4 +1,4 @@
-package com.zjc.index;
+package com.zjc.service.index;
 
 /**
  * @Author: zhangjiachen

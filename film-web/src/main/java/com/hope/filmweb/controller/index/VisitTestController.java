@@ -1,7 +1,7 @@
 package com.hope.filmweb.controller.index;
 
-import com.zjc.index.MailService;
-import com.zjc.index.IndexService;
+import com.zjc.service.mail.MailService;
+import com.zjc.service.index.IndexService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class VisitTestController {
     private MailService mailService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(HttpServletRequest request) {
+    public String hello() {
         return "html/index";
     }
 

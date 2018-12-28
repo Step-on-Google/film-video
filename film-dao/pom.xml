@@ -16,6 +16,11 @@
     <name>film-dao</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.zjc</groupId>
+            <artifactId>film-common</artifactId>
+            <version>${version}</version>
+        </dependency>
         <!--德鲁伊连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -1,4 +1,4 @@
-package com.zjc.utils;/* com.zjc.utils.RandomUtils.java created at 2016年3月29日下午2:11:37 by xingjie.zhou
+package com.zjc.service.dao.dao.utils;/* RandomUtils.java created at 2016年3月29日下午2:11:37 by xingjie.zhou
  * 
  * 汇付天下有限公司
  * Copyright (c) 2006-2016 ChinaPnR, Inc. All rights reserved.
