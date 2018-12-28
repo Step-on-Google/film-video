@@ -35,8 +35,7 @@
     </appender>
 
     <!-- SQL-APPENDER 记录所有sql输出日志 -->
-    <appender name="SQL-APPENDER"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="SQL-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志文件输出的文件名 -->
             <FileNamePattern>${LOG_HOME}/sql.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
@@ -56,7 +55,7 @@
         <appender-ref ref="SQL-APPENDER"/>
     </logger>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="application"/>
         <appender-ref ref="console"/>
     </root>
