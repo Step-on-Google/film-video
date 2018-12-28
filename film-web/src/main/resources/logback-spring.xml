@@ -3,6 +3,8 @@
 <configuration scan="true" scanPeriod="10 seconds">
     <!--引入原有的日志-->
     <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 /app/sv/logs -->
+    <property name="LOG_HOME" value="/root/logs/film-web"/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -13,25 +15,49 @@
         </layout>
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--应用日志打印-->
+    <appender name="application" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
-        <File>/root/logs/film-web/film-web.log</File>
+        <File>${LOG_HOME}/film-web.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/root/logs/film-web/film-web-%d{yyyyMMdd}.log.%i</fileNamePattern>
+            <FileNamePattern>${LOG_HOME}/application.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>10</maxHistory>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n</pattern>
         </layout>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="file"/>
+    <!-- SQL-APPENDER 记录所有sql输出日志 -->
+    <appender name="SQL-APPENDER"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_HOME}/sql.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>30</MaxHistory>
+            <!--日志文件最大的大小 -->
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <ImmediateFlush>true</ImmediateFlush>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.zjc.dao.mapper" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL-APPENDER"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="application"/>
         <appender-ref ref="console"/>
     </root>
 

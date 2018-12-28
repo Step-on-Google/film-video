@@ -1,9 +1,12 @@
 package com.zjc.service.serviceimpl.index;
 
+import com.zjc.dao.entity.TestTable;
+import com.zjc.dao.mapper.TestTableMapper;
 import com.zjc.service.index.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: zhangjiachen
@@ -14,9 +17,10 @@ import org.springframework.stereotype.Service;
 public class IndexServiceImpl implements IndexService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private TestTableMapper testTableMapper;
 
     @Override
-    public void showIndexData() {
+    public List<TestTable> testDao() {
+        return testTableMapper.queryAll();
     }
 }

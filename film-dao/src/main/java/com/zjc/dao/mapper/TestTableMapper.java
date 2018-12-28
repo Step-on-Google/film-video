@@ -1,7 +1,9 @@
-package com.zjc.service.dao.mapper;
+package com.zjc.dao.mapper;
 
 
-import com.zjc.service.dao.entity.TestTable;
+import com.zjc.dao.entity.TestTable;
+
+import java.util.List;
 
 /**
  * 测试mapper
@@ -26,5 +28,5 @@ public interface TestTableMapper {
      *
      * @return
      */
-    TestTable queryAll();
+    List<TestTable> queryAll();
 }

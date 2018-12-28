@@ -1,4 +1,4 @@
-package com.zjc.service.dao.dao.utils; /**
+package com.zjc.dao.dao.utils; /**
  * 汇付天下有限公司
  * Copyright (c) 2006-2014 ChinaPnR,Inc.All Rights Reserved.
  */

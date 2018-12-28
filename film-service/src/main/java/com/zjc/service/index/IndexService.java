@@ -1,5 +1,9 @@
 package com.zjc.service.index;
 
+import com.zjc.dao.entity.TestTable;
+
+import java.util.List;
+
 /**
  * @Author: zhangjiachen
  * @Date: 2018/11/15 17:38
@@ -10,5 +14,5 @@ public interface IndexService {
     /**
      * 展示首页数据
      */
-    public void showIndexData();
+    public List<TestTable> testDao();
 }

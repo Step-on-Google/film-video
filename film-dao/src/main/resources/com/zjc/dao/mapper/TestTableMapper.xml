@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zjc.service.dao.mapper.TestTableMapper">
-    <resultMap id="BaseResultMap" type="com.zjc.service.dao.entity.TestTable">
+<mapper namespace="com.zjc.dao.mapper.TestTableMapper">
+    <resultMap id="BaseResultMap" type="com.zjc.dao.entity.TestTable">
         <result column="id" jdbcType="VARCHAR" property="id"/>
     </resultMap>
-    <insert id="insertSelective" parameterType="com.zjc.service.dao.entity.TestTable">
+    <insert id="insertSelective" parameterType="com.zjc.dao.entity.TestTable">
         insert into TEST_TABLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

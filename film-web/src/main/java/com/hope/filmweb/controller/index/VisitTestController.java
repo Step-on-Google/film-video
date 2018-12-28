@@ -1,7 +1,9 @@
 package com.hope.filmweb.controller.index;
 
-import com.zjc.service.mail.MailService;
+import com.alibaba.fastjson.JSON;
+import com.zjc.dao.entity.TestTable;
 import com.zjc.service.index.IndexService;
+import com.zjc.service.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author:Zhang jc
@@ -31,11 +34,11 @@ public class VisitTestController {
         return "html/index";
     }
 
-    @RequestMapping(value = "/testRedis", method = RequestMethod.GET)
+    @RequestMapping(value = "/testDataSource", method = RequestMethod.GET)
     @ResponseBody
     public String testRedis() {
-        indexService.showIndexData();
-        return "redis success";
+        List<TestTable> testTables = indexService.testDao();
+        return JSON.toJSONString(testTables);
     }
 
     @RequestMapping(value = "/testSendMail", method = RequestMethod.GET)

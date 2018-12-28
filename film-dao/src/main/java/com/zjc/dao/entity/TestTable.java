@@ -1,4 +1,4 @@
-package com.zjc.service.dao.entity;
+package com.zjc.dao.entity;
 
 import lombok.Data;
 

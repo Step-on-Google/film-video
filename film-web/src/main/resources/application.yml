@@ -8,3 +8,5 @@ spring:
     port: 6379
     database: 0
     timeout: 2000
+logging:
+  config: classpath:logback-spring.xml
