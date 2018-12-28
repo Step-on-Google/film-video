@@ -12,7 +12,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @SpringBootApplication(scanBasePackages = {"com.*"})
 @ServletComponentScan
-@MapperScan("com.zjc.mapper")
+//@MapperScan("com.zjc.mapper")
 public class FilmWebApplication {
 
     public static void main(String[] args) {

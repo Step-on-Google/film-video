@@ -43,33 +43,37 @@ public class IpFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if (urlCheck(request.getRequestURI())) {
-            //如果是静态资源直接放行
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-        if (!ipCheck(request)) {
-            PrintWriter writer;
-            OutputStreamWriter osw;
-            try {
-                response.setCharacterEncoding("UTF-8");
-                osw = new OutputStreamWriter(response.getOutputStream(),
-                        "UTF-8");
-                writer = new PrintWriter(osw, true);
-                String jsonStr = JSONUtils.toJSONString("请不要频繁刷新!");
-                writer.write(jsonStr);
-                writer.flush();
-                writer.close();
-                osw.close();
+        try {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            HttpServletRequest request = (HttpServletRequest) servletRequest;
+            if (urlCheck(request.getRequestURI())) {
+                //如果是静态资源直接放行
+                filterChain.doFilter(servletRequest, servletResponse);
                 return;
-            } catch (IOException e) {
-                e.printStackTrace();
-                logger.error("过滤异常!", e);
             }
+            if (!ipCheck(request)) {
+                PrintWriter writer;
+                OutputStreamWriter osw;
+                try {
+                    response.setCharacterEncoding("UTF-8");
+                    osw = new OutputStreamWriter(response.getOutputStream(),
+                            "UTF-8");
+                    writer = new PrintWriter(osw, true);
+                    String jsonStr = JSONUtils.toJSONString("请不要频繁刷新!");
+                    writer.write(jsonStr);
+                    writer.flush();
+                    writer.close();
+                    osw.close();
+                    return;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.error("过滤异常!", e);
+                }
+            }
+            filterChain.doFilter(servletRequest, servletResponse);
+        } catch (Exception e) {
+            logger.error("IP过滤器异常", e);
         }
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
