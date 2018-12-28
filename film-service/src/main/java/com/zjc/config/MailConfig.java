@@ -1,4 +1,4 @@
-package com.hope.filmweb.config;
+package com.zjc.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

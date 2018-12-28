@@ -1,6 +1,7 @@
-package com.hope.filmweb.config;
+package com.zjc.index;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import com.zjc.config.MailConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
