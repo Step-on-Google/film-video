@@ -1,4 +1,4 @@
-package com.hope.filmweb.index;
+package com.hope.filmweb.controller.index;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

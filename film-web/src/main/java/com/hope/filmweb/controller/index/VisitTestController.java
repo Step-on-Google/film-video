@@ -1,4 +1,4 @@
-package com.hope.filmweb.index;
+package com.hope.filmweb.controller.index;
 
 import com.zjc.index.MailService;
 import com.zjc.index.IndexService;
