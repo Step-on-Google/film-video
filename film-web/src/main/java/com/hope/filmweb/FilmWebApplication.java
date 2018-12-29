@@ -4,8 +4,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * web启动类
+ *
+ * @EnableTransactionManagement 开启事物管理
  * @author:Zhang jc
  * @date: 2018/11/16 10:42
  * @description:
@@ -13,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication(scanBasePackages = {"com.*"})
 @ServletComponentScan
 @MapperScan("com.zjc.dao")
+@EnableTransactionManagement
 public class FilmWebApplication {
 
     public static void main(String[] args) {

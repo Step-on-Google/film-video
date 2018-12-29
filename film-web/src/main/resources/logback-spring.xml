@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
-<configuration scan="true" scanPeriod="10 seconds">
+<configuration>
     <!--引入原有的日志-->
     <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 /app/sv/logs -->
@@ -9,7 +9,6 @@
     <!--控台日志打印-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
         </filter>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
@@ -60,9 +59,15 @@
         <!-- 添加附加的appender,最多只能添加一个 -->
         <appender-ref ref="SQL-APPENDER"/>
     </appender>
-    <logger name="com.zjc.dao" level="DEBUG" additivity="false">
+    <logger name="com.zjc.dao.mapper" level="DEBUG">
         <appender-ref ref="SQL-APPENDER"/>
     </logger>
+
+    <!--myibatis log configure-->
+    <logger name="com.apache.ibatis" level="DEBUG"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="application"/>
