@@ -6,6 +6,7 @@ import com.zjc.service.index.IndexService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class IndexServiceImpl implements IndexService {
     private TestTableMapper testTableMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<TestTable> testDao() {
         TestTable testTable = new TestTable();
         testTable.setId("1");

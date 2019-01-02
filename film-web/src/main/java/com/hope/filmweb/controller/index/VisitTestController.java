@@ -36,7 +36,7 @@ public class VisitTestController {
 
     @RequestMapping(value = "/testDataSource", method = RequestMethod.GET)
     @ResponseBody
-    public String testRedis() {
+    public String testDataSource() {
         List<TestTable> testTables = indexService.testDao();
         return JSON.toJSONString(testTables);
     }

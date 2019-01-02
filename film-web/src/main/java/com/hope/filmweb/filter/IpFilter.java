@@ -32,9 +32,13 @@ public class IpFilter implements Filter {
     private RedisUtils redisUtils;
 
 
-    private static String img = "/img";
-    private static String css = "/css";
-    private static String js = "/js";
+    private static String IMG = "/img";
+    private static String CSS = "/css";
+    private static String JS = "/js";
+    private static String HTML = "/html";
+    private static String JSP = "/jsp";
+    private static String ICO = "/ico";
+    private static String DRUID = "/druid";
 
     @Override
     public void init(javax.servlet.FilterConfig filterConfig) throws ServletException {
@@ -113,7 +117,8 @@ public class IpFilter implements Filter {
      * @date: 2018/12/25 10:09
      */
     private boolean urlCheck(String url) {
-        if (url.contains(img) || url.contains(js) || url.contains(css)) {
+        if (url.contains(IMG) || url.contains(JS) || url.contains(CSS) || url.contains(HTML) || url.contains(JSP) || url.contains(ICO)
+                || url.contains(DRUID)) {
             return true;
         }
         return false;
