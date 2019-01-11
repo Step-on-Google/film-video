@@ -5,14 +5,22 @@ import com.zjc.dao.entity.TestTable;
 import com.zjc.service.index.IndexService;
 import com.zjc.service.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author:Zhang jc
@@ -28,6 +36,9 @@ public class VisitTestController {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
@@ -59,5 +70,37 @@ public class VisitTestController {
         }
         return "mailSend success";
     }
+
+    @RequestMapping(value = "/testKafka", method = RequestMethod.GET)
+    @ResponseBody
+    public String testKafka() {
+        try {
+//            Map<String, String> map = new HashMap(16);
+//            map.put("test", "zjc");
+//            ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic", "1", "你好呀!");
+
+            Properties props = new Properties();
+            props.put("bootstrap.servers", "47.100.237.222:9092");
+            props.put("acks", "all");
+            props.put("retries", 0);
+            props.put("batch.size", 16384);
+            props.put("linger.ms", 1);
+            props.put("buffer.memory", 33554432);
+            props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+            props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+            Producer<String, String> producer = new KafkaProducer(props);
+            for(int i = 0; i < 100; i++)
+                producer.send(new ProducerRecord<String, String>("zjcTopic", Integer.toString(i), Integer.toString(i)));
+
+            producer.close();
+//            log.info("打印kafka返回{}", zjcTopic);
+        } catch (Exception e) {
+            log.error("kafka异常!", e);
+            return "kafkaTest error";
+        }
+        return "kafkaTest success";
+    }
+
 
 }

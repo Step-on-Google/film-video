@@ -8,5 +8,23 @@ spring:
     port: 6379
     database: 0
     timeout: 2000
+  kafka:
+    bootstrap-servers: 47.100.237.222:9092
+    producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        retries: 0
+        batch-size: 16384
+        buffer-memory: 33554432
+        properties:
+          linger.ms: 1
+    consumer:
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        group-id: 1
+        properties:
+          session.timeout.ms: 15000
+        enable-auto-commit: false
+        auto-commit-interval: 100ms
 logging:
   config: classpath:logback-spring.xml
