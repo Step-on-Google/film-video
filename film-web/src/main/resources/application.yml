@@ -19,12 +19,16 @@ spring:
         properties:
           linger.ms: 1
     consumer:
-        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        group-id: 1
-        properties:
-          session.timeout.ms: 15000
-        enable-auto-commit: false
-        auto-commit-interval: 100ms
+        key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+        auto-commit-interval: 100
+        heartbeat-interval: 500
+        #每个批次获取数
+        max-poll-records: 1000
+        auto-offset-reset: earliest
+        group-id: groupTest
+    listener:
+          # kafka消费者并发数
+          concurrency: 20
 logging:
   config: classpath:logback-spring.xml

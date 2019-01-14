@@ -5,10 +5,12 @@ import com.zjc.dao.entity.TestTable;
 import com.zjc.service.index.IndexService;
 import com.zjc.service.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -85,6 +87,15 @@ public class VisitTestController {
         }
         return "kafkaTest success";
     }
+
+//    @KafkaListener(topics = "zjcTopic")
+//    public void kafkaListener(ConsumerRecord record) {
+//        try {
+//            log.info("来了老弟!", record);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 }
