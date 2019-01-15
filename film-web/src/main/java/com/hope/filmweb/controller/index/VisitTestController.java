@@ -12,6 +12,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,14 +89,20 @@ public class VisitTestController {
         return "kafkaTest success";
     }
 
-//    @KafkaListener(topics = "zjcTopic")
-//    public void kafkaListener(ConsumerRecord record) {
-//        try {
-//            log.info("来了老弟!", record);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @KafkaListener(id = "zjcConsumer3", topics = "zjcTopic")
+    public void kafkaListener(List<ConsumerRecord> records) {
+        try {
+            for (ConsumerRecord record : records) {
+                log.info("来了老弟!");
+                System.out.println("topic" + record.topic());
+                System.out.println("key:" + record.key());
+
+                System.out.println("value:" + record.value());
+            }
+        } catch (Exception e) {
+            log.error("kafka 消费者异常!", e);
+        }
+    }
 
 
 }
