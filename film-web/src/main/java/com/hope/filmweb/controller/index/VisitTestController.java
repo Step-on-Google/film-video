@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author:Zhang jc
@@ -74,9 +72,7 @@ public class VisitTestController {
     @ResponseBody
     public String testKafka() {
         try {
-            Map<String, String> map = new HashMap(16);
-            map.put("test", "zjc");
-            ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic1", "1", "你好呀!".getBytes());
+            ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic1", "1", "张嘉琛!".getBytes());
             log.info("打印kafka返回{}", zjcTopic);
         } catch (Exception e) {
             log.error("kafka异常!", e);
@@ -85,18 +81,18 @@ public class VisitTestController {
         return "kafkaTest success";
     }
 
-    @KafkaListener(id = "zjcConsumer3", topics = "zjcTopic1")
+    @KafkaListener(id = "zjc", topics = "zjcTopic1")
     public void kafkaListener(List<ConsumerRecord> records, Acknowledgment ack) {
         try {
             for (ConsumerRecord record : records) {
-                log.info("来了老弟!");
                 log.info(record.toString());
                 log.info("value:" + new String((byte[]) record.value()));
             }
         } catch (Exception e) {
             log.error("kafka 消费者异常!", e);
         } finally {
-            ack.acknowledge();//手动提交偏移量
+            //手动提交偏移量
+            ack.acknowledge();
         }
 
     }
