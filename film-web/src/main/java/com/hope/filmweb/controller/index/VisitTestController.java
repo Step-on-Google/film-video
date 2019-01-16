@@ -90,8 +90,8 @@ public class VisitTestController {
         try {
             for (ConsumerRecord record : records) {
                 log.info("来了老弟!");
-                System.out.println(record.toString());
-                System.out.println("value:" + new String((byte[]) record.value()));
+                log.info(record.toString());
+                log.info("value:" + new String((byte[]) record.value()));
             }
         } catch (Exception e) {
             log.error("kafka 消费者异常!", e);
