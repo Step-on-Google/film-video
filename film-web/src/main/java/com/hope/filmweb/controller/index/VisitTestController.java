@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,8 +87,10 @@ public class VisitTestController {
     public void kafkaListener(List<ConsumerRecord> records, Acknowledgment ack) {
         try {
             for (ConsumerRecord record : records) {
-                log.info(record.toString());
-                log.info("value:" + new String((byte[]) record.value()));
+                Date date = new Date();
+                date.setTime(record.timestamp());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                log.info("value:{},time:{}", new String((byte[]) record.value()), sdf.format(date));
             }
         } catch (Exception e) {
             log.error("kafka 消费者异常!", e);
@@ -94,7 +98,6 @@ public class VisitTestController {
             //手动提交偏移量
             ack.acknowledge();
         }
-
     }
 
 }
