@@ -53,22 +53,40 @@ public class KafkaConfig {
     @Value("${spring.kafka.listener.concurrency}")
     private int concurrency;
 
+    /**
+     * kafka监听配置
+     *
+     * @return
+     */
     @Bean
     public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, byte[]> factory = new ConcurrentKafkaListenerContainerFactory<String, byte[]>();
         factory.setConcurrency(concurrency);
         factory.setConsumerFactory(consumerFactory());
-        factory.setBatchListener(true);//设置为批量消费，每个批次数量在Kafka配置参数中设置ConsumerConfig.MAX_POLL_RECORDS_CONFIG
-        factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);//设置提交偏移量的方式
+        //设置为批量消费，每个批次数量在Kafka配置参数中设置ConsumerConfig.MAX_POLL_RECORDS_CONFIG
+        factory.setBatchListener(true);
+        //设置提交偏移量的方式
+        factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
 
+    /**
+     * 消费者工厂
+     *
+     * @return
+     */
     public ConsumerFactory<String, byte[]> consumerFactory() {
         return new DefaultKafkaConsumerFactory(consumerConfigs(), new StringDeserializer(), new ByteArrayDeserializer());
     }
 
+    /**
+     * 消费者配置
+     *
+     * @author:Zhang jc
+     * @date: 2019/1/16 14:34
+     */
     public Map<String, Object> consumerConfigs() {
-        Map<String, Object> propsMap = new HashMap<String, Object>();
+        Map<String, Object> propsMap = new HashMap<String, Object>(16);
         propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
         propsMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, enableAutoCommit);
         propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, autoCommitInterval);
@@ -78,8 +96,8 @@ public class KafkaConfig {
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
         propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
-
-        propsMap.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, maxPollRecords);//每个批次获取数
+        //每个批次获取数
+        propsMap.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, maxPollRecords);
         return propsMap;
     }
 

@@ -19,17 +19,17 @@ spring:
         properties:
           linger.ms: 1
     consumer:
-          enable-auto-commit: false
-          group-id: feature-forwarding
-          #earliest #latest
-          auto-offset-reset: earliest
-          #kafka ip port
-          bootstrap-servers: 47.100.237.222:9092
-          auto-commit-interval: 100
-          heartbeat-interval: 500
-          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-          value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-          max-poll-records: 1000
+        enable-auto-commit: false
+        group-id: feature-forwarding
+        #earliest #latest
+        auto-offset-reset: earliest
+        #kafka ip port
+        bootstrap-servers: 47.100.237.222:9092
+        auto-commit-interval: 100
+        heartbeat-interval: 500
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+        max-poll-records: 1000
     listener:
           # kafka消费者并发数
           concurrency: 20
