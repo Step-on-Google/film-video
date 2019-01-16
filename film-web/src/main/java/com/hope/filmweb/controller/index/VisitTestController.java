@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,7 +77,17 @@ public class VisitTestController {
     public String testKafka() {
         try {
             ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic1", "1", "张嘉琛!".getBytes());
-            log.info("打印kafka返回{}", zjcTopic);
+            zjcTopic.addCallback(new ListenableFutureCallback() {
+                @Override
+                public void onFailure(Throwable throwable) {
+                    log.warn("发送失败！");
+                }
+
+                @Override
+                public void onSuccess(@Nullable Object o) {
+                    log.warn("发送成功！");
+                }
+            });
         } catch (Exception e) {
             log.error("kafka异常!", e);
             return "kafkaTest error";
