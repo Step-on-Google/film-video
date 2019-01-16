@@ -6,9 +6,6 @@ import com.zjc.service.index.IndexService;
 import com.zjc.service.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -23,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @author:Zhang jc
@@ -80,7 +76,7 @@ public class VisitTestController {
         try {
             Map<String, String> map = new HashMap(16);
             map.put("test", "zjc");
-            ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic", "1", "你好呀!");
+            ListenableFuture zjcTopic = kafkaTemplate.send("zjcTopic1", "1", "你好呀!".getBytes());
             log.info("打印kafka返回{}", zjcTopic);
         } catch (Exception e) {
             log.error("kafka异常!", e);
@@ -89,20 +85,20 @@ public class VisitTestController {
         return "kafkaTest success";
     }
 
-    @KafkaListener(id = "zjcConsumer3", topics = "zjcTopic")
-    public void kafkaListener(List<ConsumerRecord> records) {
+    @KafkaListener(id = "zjcConsumer3", topics = "zjcTopic1")
+    public void kafkaListener(List<ConsumerRecord> records, Acknowledgment ack) {
         try {
             for (ConsumerRecord record : records) {
                 log.info("来了老弟!");
-                System.out.println("topic" + record.topic());
-                System.out.println("key:" + record.key());
-
-                System.out.println("value:" + record.value());
+                System.out.println(record.toString());
+                System.out.println("value:" + new String((byte[]) record.value()));
             }
         } catch (Exception e) {
             log.error("kafka 消费者异常!", e);
+        } finally {
+            ack.acknowledge();//手动提交偏移量
         }
-    }
 
+    }
 
 }
