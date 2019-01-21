@@ -51,23 +51,6 @@ public class MailService {
         timeout = mailConfig.getSmtpTimeout();
     }
 
-
-//    public boolean sendEmail(Email email) {
-//        try {
-//            SimpleMailMessage message = new SimpleMailMessage();
-//            message.setFrom(authName); //发送者
-//            message.setTo(email.); //接受者
-//            message.setSubject(email.getTitle()); //发送标题
-//            message.setText(email.getText());  //发送内容
-//            sender.send(message);
-//            return true;
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//            return false;
-//        }
-//    }
-
-
     /**
      * 发送邮件
      *
@@ -115,10 +98,10 @@ public class MailService {
             messageHelper.setText(content, true);
 
             if (attachfiles != null && attachfiles.size() > 0) {
-                for (Map<String, String> attachfile : attachfiles) {
-                    String attachfileName = attachfile.get("name");
-                    File file = new File(attachfile.get("file"));
-                    messageHelper.addAttachment(attachfileName, file);
+                for (Map<String, String> attachFile : attachfiles) {
+                    String attachFileName = attachFile.get("name");
+                    File file = new File(attachFile.get("file"));
+                    messageHelper.addAttachment(attachFileName, file);
                 }
             }
             javaMailSender.send(mailMessage);
