@@ -39,6 +39,8 @@ public class IpFilter implements Filter {
     private static String JSP = "/jsp";
     private static String ICO = "/ico";
     private static String DRUID = "/druid";
+    private static String MP4 = "/mp4";
+    private static String MP3 = "/mp3";
 
     @Override
     public void init(javax.servlet.FilterConfig filterConfig) throws ServletException {
@@ -118,7 +120,7 @@ public class IpFilter implements Filter {
      */
     private boolean urlCheck(String url) {
         if (url.contains(IMG) || url.contains(JS) || url.contains(CSS) || url.contains(HTML) || url.contains(JSP) || url.contains(ICO)
-                || url.contains(DRUID)) {
+                || url.contains(DRUID) || url.contains(MP4) || url.contains(MP3)) {
             return true;
         }
         return false;
