@@ -35,3 +35,6 @@ spring:
           concurrency: 20
 logging:
   config: classpath:logback-spring.xml
+eureka:
+  client:
+    service-url: http://47.100.237.222:8081/
