@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan
 @MapperScan("com.zjc.dao")
 @EnableTransactionManagement
-//@EnableEurekaClient
+@EnableEurekaClient
 public class FilmWebApplication {
 
     public static void main(String[] args) {
