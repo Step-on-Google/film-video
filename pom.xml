@@ -15,7 +15,7 @@
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2019</inceptionYear>
     <modelVersion>4.0.0</modelVersion>
-    <name>file-web</name>
+    <name>film-project</name>
     <url>http://zjc.wait-hope.com:8080</url>
 
     <modules>
