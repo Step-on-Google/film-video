@@ -37,4 +37,5 @@ logging:
   config: classpath:logback-spring.xml
 eureka:
   client:
-    service-url: http://47.100.237.222:8081/
+    service-url:
+      defaultZone: http://47.100.237.222:8081/
