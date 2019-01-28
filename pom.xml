@@ -7,6 +7,8 @@
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
         <!--指定编译的编码-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--springCloud版本-->
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
     </properties>
 
     <groupId>com.zjc</groupId>
@@ -35,8 +37,43 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!--springCloud组件依赖-->
+        <!--服务监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--eureka-client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+        <!--feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
+    <!--springCloud配置-->
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

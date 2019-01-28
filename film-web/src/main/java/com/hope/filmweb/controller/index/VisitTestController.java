@@ -2,6 +2,7 @@ package com.hope.filmweb.controller.index;
 
 import com.alibaba.fastjson.JSON;
 import com.zjc.dao.entity.TestTable;
+import com.zjc.service.feign.FeignTest;
 import com.zjc.service.index.IndexService;
 import com.zjc.service.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,9 @@ public class VisitTestController {
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
+
+    @Autowired
+    private FeignTest feignTest;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
@@ -110,6 +114,26 @@ public class VisitTestController {
             //手动提交偏移量
             ack.acknowledge();
         }
+    }
+
+    /**
+     * 测试feign
+     *
+     * @author:Zhang jc
+     * @date: 2019/1/28 14:57
+     */
+    @RequestMapping("/feignTest")
+    @ResponseBody
+    public String feignTest(HttpServletRequest request) {
+        try {
+            log.info("测试远程feign服务!");
+            String user = feignTest.testSendMail(request.getParameter("user"));
+            log.info("打印RPC返回结果{}", user);
+            return "feign调用成功，打印返回{}" + user;
+        } catch (Exception e) {
+            log.error("远程调用异常!", e);
+        }
+        return "feign调用GG";
     }
 
 }
