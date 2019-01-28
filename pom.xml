@@ -5,6 +5,8 @@
 
     <properties>
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+        <!--指定编译的编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <groupId>com.zjc</groupId>
@@ -33,14 +35,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- 定义 spring cloud 版本 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
@@ -50,8 +44,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

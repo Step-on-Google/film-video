@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.zjc</groupId>
             <artifactId>film-common</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <!--德鲁伊连接池-->
         <dependency>
