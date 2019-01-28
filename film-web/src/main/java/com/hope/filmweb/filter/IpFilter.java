@@ -106,7 +106,7 @@ public class IpFilter implements Filter {
             return false;
         }
         logger.info("正常访问...");
-        redisUtils.set(ip, ip, 2);
+//        redisUtils.set(ip, ip, 2);
         return true;
     }
 
