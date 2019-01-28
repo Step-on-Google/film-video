@@ -12,14 +12,14 @@
 
     <groupId>com.zjc</groupId>
     <artifactId>film-dao</artifactId>
-    <version>${project-version}</version>
     <name>film-dao</name>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>com.zjc</groupId>
             <artifactId>film-common</artifactId>
-            <version>${project-version}</version>
+            <version>${version}</version>
         </dependency>
         <!--德鲁伊连接池-->
         <dependency>
