@@ -41,10 +41,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://47.100.237.222:8081/eureka/
-    registry-fetch-interval-seconds: 5
+    registry-fetch-interval-seconds: 30
   instance:
     #表示eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，
     #则将摘除该instance。除此之外，如果该instance实现了HealthCheckCallback，并决定让自己unavailable的话，则该instance也不会接收到流量
-    lease-renewal-interval-in-seconds: 1
+    lease-renewal-interval-in-seconds: 5
     #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
-    lease-expiration-duration-in-seconds: 2
+    lease-expiration-duration-in-seconds: 10
